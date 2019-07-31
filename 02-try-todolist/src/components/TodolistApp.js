@@ -16,16 +16,29 @@ export default class TodolistApp extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			data: apiData
+			data: apiData,
+			search: {
+				text: '',
+				statusFilter: ''
+			}
 		}
 	}
+	searchTextChanged = (text) => {
+		// https://stackoverflow.com/a/43639228
+		// state 내의 object에, 지정한 값만 덮어쓰기
+		this.setState(({ search: oldSearch }) => ({ search: { ...oldSearch, text }}))
+	}
+	statusFilterChanged = (statusFilter) => {
+		this.setState(({ search: oldSearch }) => ({ search: { ...oldSearch, statusFilter: statusFilter }}))
+	}
 	render = () => {
-		const { data } = this.state
+		const { data, search } = this.state
 		return (
 			<div>
+				{ JSON.stringify(search) }
 				<SummaryForm data={ data }/>
-				<SearchForm/>
-				<ListForm data={ data }/>
+				<SearchForm param={ search } onTextChanged={this.searchTextChanged} onRadioChanged={this.statusFilterChanged}/>
+				<ListForm data={ data } filter={ search }/>
 			</div>
 		)
 	}
