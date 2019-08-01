@@ -17,7 +17,7 @@ export default class SearchForm extends Component {
 		return (
 			<div>
 				<div>
-					<input name="text" placeholder="검색" value={ text } onChange={ this.onParamChanged }/>
+					<input type="text" name="text" placeholder="검색" value={ text } onChange={ this.onParamChanged }/>
 				</div>
 				<div>
 					<label><input name="statusFilter" type="radio" value="all" checked={ statusFilter === 'all' } onChange={ this.onParamChanged }/>전체</label>

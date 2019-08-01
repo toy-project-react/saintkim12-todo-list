@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import moment from 'moment'
+import { format } from 'date-fns'
 
 // const format = (...arg) => moment().format.call(window, arg)
 export default class SummaryForm extends Component {
 	render = () => {
 		const { data } = this.props
-		const now = moment().format('YYYY-MM-DD')
+		// const now = moment().format('YYYY-MM-DD')
+		const now = format(new Date(), 'YYYY-MM-DD')
 		const procList = data.filter(({ status, procDate }) => status === 1)
 		const nowProcList = data.filter(({ status, procDate }) => status === 1 && procDate === now)
 		return (

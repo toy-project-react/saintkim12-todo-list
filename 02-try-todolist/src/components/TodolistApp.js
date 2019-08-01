@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import SummaryForm from './SummaryForm'
+import AddItemForm from './AddItemForm'
 import SearchForm from './SearchForm'
 import ListForm from './ListForm'
 
@@ -23,6 +24,18 @@ export default class TodolistApp extends Component {
 			}
 		}
 	}
+	onItemAdded = (item) => {
+		const { data } = this.state
+		const key = data.length + 1
+		const status = 0
+		const procDate = ''
+		const newItem = Object.assign({ key, status, procDate }, item)
+		this.setState({ data: data.concat(newItem) })
+	}
+	onStatusChanged = ({ key, status }) => {
+		// 부모로 전달
+		console.log(key, status)
+	}
 	searchTextChanged = (text) => {
 		// https://stackoverflow.com/a/43639228
 		// state 내의 object에, 지정한 값만 덮어쓰기
@@ -35,10 +48,13 @@ export default class TodolistApp extends Component {
 		const { data, search } = this.state
 		return (
 			<div>
-				{ JSON.stringify(search) }
+				{/* { JSON.stringify(search) } */}
 				<SummaryForm data={ data }/>
+				<hr/>
+				<AddItemForm onAdded={ this.onItemAdded }/>
+				<hr/>
 				<SearchForm param={ search } onTextChanged={this.searchTextChanged} onRadioChanged={this.statusFilterChanged}/>
-				<ListForm data={ data } filter={ search }/>
+				<ListForm data={ data } filter={ search } onStatusChanged={ this.onStatusChanged }/>
 			</div>
 		)
 	}
