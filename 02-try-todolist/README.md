@@ -29,7 +29,7 @@ Create React App으로 생성하였음
 각 항목에 대한 컴포넌트
 
 ## 구조
-[구조](../img/02-readme-001.png)
+![구조](../img/02-readme-001.png)
 
 ## 기능
 ??
