@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { format } from 'date-fns'
 import SummaryForm from './SummaryForm'
 import AddItemForm from './AddItemForm'
 import SearchForm from './SearchForm'
 import ListForm from './ListForm'
+// import update from 'react-addons-update'
 
 const apiData = [
 	{ title: 'react 공부', content: 'react Todolist 짜기', status: 1, dueDate: '2019-08-03', procDate: '2019-07-30' },
@@ -20,7 +22,7 @@ export default class TodolistApp extends Component {
 			data: apiData,
 			search: {
 				text: '',
-				statusFilter: ''
+				statusFilter: '0'
 			}
 		}
 	}
@@ -33,8 +35,12 @@ export default class TodolistApp extends Component {
 		this.setState({ data: data.concat(newItem) })
 	}
 	onStatusChanged = ({ key, status }) => {
-		// 부모로 전달
-		console.log(key, status)
+		// 전달받은 상태 처리
+		this.setState(({ data }) => ({
+			data: data.map(o => (o.key === key)
+				? Object.assign(o, { status, procDate: status === 1/* 완료 */ ? format(new Date(), 'YYYY-MM-DD') : '' })
+				: o)
+		}))
 	}
 	searchTextChanged = (text) => {
 		// https://stackoverflow.com/a/43639228

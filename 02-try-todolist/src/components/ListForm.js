@@ -51,9 +51,9 @@ export default class ListForm extends Component {
 						</tbody>
 					</table>
 				</div>
-				<div>
+				{/* <div>
 					<button>삭제</button>
-				</div>
+				</div> */}
 			</div>
 		)
 	}

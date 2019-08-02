@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { format } from 'date-fns'
 // import { STATUS_MAP } from './ItemRow'
 const INIT_STATE = {
 	title: '',
 	content: '',
-	dueDate: ''
+	dueDate: format(new Date(), 'YYYY-MM-DD')
 }
 export default class AddItemForm extends Component {
 	constructor(props) {
