@@ -1,6 +1,6 @@
-import React, { createContext, useReducer, useEffect } from 'react'
-import { format } from 'date-fns'
+import React, { useReducer, useEffect } from 'react'
 import SummaryUI from 'containers/SummaryUI'
+import AddItemUI from 'containers/AddItemUI'
 import TodolistDataContext from 'contexts/TodolistDataContext'
 import dataReducer, { initialState as initialData } from 'reducers/TodolistData'
 import searchReducer, { initialState as initialSearch } from 'reducers/SearchFilter'
@@ -49,7 +49,7 @@ const TodolistAppForm = () => {
 	return (
 		<TodolistDataContext.Provider value={{ data, search, dispatchData, dispatchSearch }}>
 			<SummaryUI/>
-			AddItemUI
+			<AddItemUI/>
 			SearchUI
 			ListUI
 		</TodolistDataContext.Provider>
