@@ -2,6 +2,10 @@ import React, { useReducer, useEffect } from 'react'
 import TodolistDataContext from 'contexts/TodolistDataContext'
 import dataReducer, { initialState as initialData } from 'reducers/TodolistData'
 import searchReducer, { initialState as initialSearch } from 'reducers/SearchFilter'
+import SummaryUI from 'components/SummaryUI'
+import AddItemUI from 'components/AddItemUI'
+import SearchUI from 'components/SearchUI'
+import ListUI from 'components/ListUI'
 
 // const apiData = [
 // 	{ title: 'react 공부', content: 'react Todolist 짜기', status: 1, dueDate: '2019-08-03', procDate: '2019-07-30' },
@@ -28,7 +32,7 @@ const loadData = () => new Promise((resolve) => {
 	}, 2000)
 })
 
-const TodolistAppForm = ({ children }) => {
+const TodolistApp = () => {
 	// const [data, setData] = useState([])
 	// const [search, setSearch] = useState({
 	// 	text: '',
@@ -39,7 +43,6 @@ const TodolistAppForm = ({ children }) => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			// console.log('fetchData')
 			const apiData = await loadData()
 			dispatchData({ type: 'INIT_ITEM', data: apiData })
 		}
@@ -47,8 +50,12 @@ const TodolistAppForm = ({ children }) => {
 	}, [] /* 최초 로딩 시 한번만 부르도록, 어떤 값도 watch하지 않겠다는 표시. 값이 비어있으면, data가 변경될 때마다 다시 실행함.. */)
 	return (
 		<TodolistDataContext.Provider value={{ data, search, dispatchData, dispatchSearch }}>
-			{ children }
+			<SummaryUI/>
+			<AddItemUI/>
+			<SearchUI/>
+			<ListUI/>
 		</TodolistDataContext.Provider>
 	)
 }
-export default TodolistAppForm
+
+export default TodolistApp
