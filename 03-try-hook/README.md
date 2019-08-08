@@ -117,3 +117,31 @@ useReducer는 이 reducer를 인자로 받아, 상태값 및 dispatch(reducer를
 ```jsx
 	const [상태값, 디스패쳐] = useReducer(리듀서, 초기값, 초기화함수)
 ```
+
+## 어플리케이션 작동 방식
+기본적으로 02-try-hook을 기존 클래스 방식에서 hook으로 전환한 거임
+### hook 사용 및 전환
+
+### Context, Reducer을 사용한 광역 상태값 관리
+React에서 기본으로 제공하는 Context를 사용하여, redux를 사용하지 않고 상태값을 관리할 수 있도록 구현
+
+### 구조
+redux의 구현 방식 중 하나인 [container-presentational-component](https://medium.com/@lyhlg0201/react-container-presentational-1bbc701b7fd4) 방식을 사용
+
+#### components
+화면을 구현하는 컴포넌트(Presentational Components) 들이 정의되어 있고, 각 컴포넌트에서는 props 또는 props를 통해 연산된 값만을 단순히 출력할 수 있도록 처리
+(연산은 container에 위임)
+
+#### containers
+데이터를 처리하는 컴포넌트(Container Components) 들이 정의되어 있고, 각 상태값을 dispatcher를 통해 처리하여 전달하는 역할을 수행
+
+#### contexts
+어플리케이션의 상태값 및 dispatcher들을 관리하는 Context를 정의
+Context의 Provider에 관련 객체들을 전달하여 하위 컴포넌트들이 상태값 및 dispatcher에 접근할 수 있도록 함
+
+#### reducers
+dispatcher가 요청한 처리를 수행하고 상태값을 바꾸어주는 reducer를 정의
+실질적인 상태값 변경을 처리함
+
+#### constants
+공통으로 사용하는 상수 정의
